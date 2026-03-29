@@ -3,6 +3,7 @@ package com.sddevops.jenkins_project2.eclipse;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.Random;
 
 public class Student {
 
@@ -62,7 +63,6 @@ public class Student {
         return id == student.id &&
                 Objects.equals(name, student.name) &&
                 Objects.equals(birthday, student.birthday);
-        // friend is NOT included to avoid circular comparison issues
     }
 
     @Override
@@ -91,5 +91,21 @@ public class Student {
                 ", birthday = " + birthday +
                 ", friend = " + (friend != null ? friend.name : "no best friend") +
                 '}';
+    }
+    
+    public void assignRandomUsername(Random random) {
+        int minLength = 5;
+        int maxLength = 10;
+
+        int length = random.nextInt(maxLength - minLength + 1) + minLength;
+
+        StringBuilder sb = new StringBuilder();
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
+
+        for (int i = 0; i < length; i++) {
+            sb.append(chars.charAt(random.nextInt(chars.length())));
+        }
+
+        this.name = sb.toString();
     }
 }
